@@ -113,6 +113,8 @@ Activate the virtual environment
 Install backend dependencies: pip install -r requirements.txt.
 Run database migrations: python manage.py migrate.
 Start the Django development server: python manage.py runserver.
+----------------------------------------------------------
+http://localhost:3000/login [for login to website]
 ----------------------------------------------------------------------------------------------------------------------------------
 The project should now be accessible at http://localhost:3000,http://localhost:3001 (frontend) and http://localhost:8000 (backend).
 ---------------------------------------------------------------------------------------------------------------------------------------
