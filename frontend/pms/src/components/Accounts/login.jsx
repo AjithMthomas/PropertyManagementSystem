@@ -49,6 +49,8 @@ const LoginPage = () => {
           history('/');
           toast.success('Logged in succesfully')
           
+        }else{
+          toast.error('something went wrong')
         }
          };
     

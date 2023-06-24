@@ -67,7 +67,7 @@ def activate(request, uidb64, token):
 
         uid = urlsafe_base64_decode(uidb64).decode()
         user = User._default_manager.get(pk = uid)
-    except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+    except(TypeError,User.DoesNotExist):
         user = None
 
     if user is not None and default_token_generator.check_token(user, token):

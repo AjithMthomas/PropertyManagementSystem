@@ -2,7 +2,7 @@ import React from "react";
 import {
   Card,Typography,List,
   ListItemPrefix,
-   Accordion,AccordionHeader,
+   Accordion,AccordionHeader,ListItem,AccordionBody
 } from "@material-tailwind/react";
 import {
   PresentationChartBarIcon,

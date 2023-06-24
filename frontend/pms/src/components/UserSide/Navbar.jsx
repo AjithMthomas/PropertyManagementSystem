@@ -28,8 +28,11 @@ export default function NavbarComponent() {
   }
 
   useEffect(() => {
-    const decoded = jwtDecode(localResponse)
-    console.log(decoded,'decoded')
+    if(localResponse){
+      const decoded = jwtDecode(localResponse)
+      console.log(decoded,'decoded')
+    }
+   
     window.addEventListener("resize", () => window.innerWidth >= 960 && setOpenNav(false));
   }, []);
  
