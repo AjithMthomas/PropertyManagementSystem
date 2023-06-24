@@ -3,11 +3,16 @@ import axios from 'axios'
 import { AiFillEdit } from 'react-icons/ai'
 import { Button } from "@material-tailwind/react";
 import { Toaster } from 'react-hot-toast';
-import PropertyForm from './CreateProperty';
+import PropertyCreateForm from './CreateProperty';
+import PropertyEdit from  './EditProperty'
 
 function Properties() {
     const [Properties,setProperties] = useState([])
-    const [showForm,setShowForm] = useState(false)
+    const [showCreateForm,setShowCreateForm] = useState(false)
+    const [showEditProperty,setshowEditProperty] = useState(false)
+    const [propertyID,setPropertyID] =  useState('')
+
+
     async function getProperties(){
         try{
             const response = await axios.get('/property/properties')
@@ -17,24 +22,34 @@ function Properties() {
         }
     }
 
+    const EditProperty = (id)=>{
+        setshowEditProperty(true)
+        setPropertyID(id)
+
+    }
+
     useEffect(()=>{
         getProperties()
     },[])
   
     return (
-        <div className='flex h-full bg-acontent mt-3 w-full '>
+        <div className='flex  bg-acontent mt-3 w-full '>
             <Toaster position='top-center' reverseOrder='false' limit={1} ></Toaster>
-        
-            {showForm &&
-            <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-50">
-                <PropertyForm/>
+            {showEditProperty&&
+             <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-50">
+             <PropertyEdit id={propertyID}/>
             </div>
             }
-          <div className='px-5 w-full h-auto min-h-screen mx-5 mt-2  py-8 font-poppins flex flex-col place-content-start place-items-center bg-white shadow-xl rounded-xl'>
+            {showCreateForm &&
+            <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-50">
+                <PropertyCreateForm/>
+            </div>
+            }
+          <div className='px-5 w-full h-auto  mx-5 mt-2  py-8 font-poppins flex flex-col place-content-start place-items-center bg-white shadow-xl rounded-xl'>
             <div className='w-full h-screen px-3 font-poppins'>
             <h1 className='font-serif  text-3xl text-start  underline ms-4'>Property List</h1>  
             <div className="w-full p-5 flex justify-end ">
-           <Button variant="outlined " className='py-4  text-grayh border border-blue-300' onClick={()=>setShowForm(true)}>Add Department</Button>
+           <Button variant="outlined " className='py-4  text-grayh border border-blue-300' onClick={()=>setShowCreateForm(true)}>Add Department</Button>
            
         <input
             type="text"
@@ -82,7 +97,7 @@ function Properties() {
                                     <p>{Property?.phone_number}</p>
                                 </td>
                                 <td class="px-6 py-4">
-                              <AiFillEdit/>
+                              <AiFillEdit onClick={()=>EditProperty(Property.id)}/>
                                </td>
                               
                             </tr>

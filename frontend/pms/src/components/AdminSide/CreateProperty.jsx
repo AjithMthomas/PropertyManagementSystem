@@ -93,7 +93,7 @@ const PropertyForm = () => {
 
   return (
     <div className="bg-gray-200 w-4/5 rounded-xl">
-      <h2 className="text-2xl font-bold mb-4">Create New Property</h2>
+      <h2 className="text-2xl font-bold mb-4 mt-4">Create New Property</h2>
       <form onSubmit={handleSubmit}>
         <div className="grid grid-cols-2 gap-4 mx-4">
           <div>
@@ -101,11 +101,7 @@ const PropertyForm = () => {
               Owner Name
             </label>
             <input
-              type="text"
-              id="owner_name"
-              name="owner_name"
-              value={owner_name}
-              onChange={handleChange}
+              type="text"  id="owner_name"  name="owner_name" value={owner_name}  onChange={handleChange}
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-blue-500"
             />
           </div>
@@ -114,11 +110,7 @@ const PropertyForm = () => {
               Property Name
             </label>
             <input
-              type="text"
-              id="property_name"
-              name="property_name"
-              value={property_name}
-              onChange={handleChange}
+              type="text"  id="property_name"   name="property_name"   value={property_name} onChange={handleChange}
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-blue-500"
             />
           </div>
@@ -127,12 +119,8 @@ const PropertyForm = () => {
               Price
             </label>
             <input
-              type="text"
-              id="price"
-              name="price"
-              value={price}
-              onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-blue-500"
+              type="text" id="price"  name="price"  value={price}  onChange={handleChange}
+             className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-blue-500"
             />
           </div>
           <div>
@@ -140,11 +128,7 @@ const PropertyForm = () => {
               Address
             </label>
             <input
-              type="text"
-              id="address"
-              name="address"
-              value={address}
-              onChange={handleChange}
+              type="text" id="address" name="address" value={address} onChange={handleChange}
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-blue-500"
             />
           </div>
@@ -153,10 +137,7 @@ const PropertyForm = () => {
               Description
             </label>
             <textarea
-              id="description"
-              name="description"
-              value={description}
-              onChange={handleChange}
+              id="description" name="description" value={description} onChange={handleChange}
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-blue-500"
             />
           </div>
@@ -165,11 +146,7 @@ const PropertyForm = () => {
               Phone Number
             </label>
             <input
-              type="text"
-              id="phone_number"
-              name="phone_number"
-              value={phone_number}
-              onChange={handleChange}
+              type="text" id="phone_number"  name="phone_number" value={phone_number} onChange={handleChange}
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-blue-500"
             />
           </div>
@@ -178,11 +155,7 @@ const PropertyForm = () => {
               Rooms Available
             </label>
             <input
-              type="number"
-              id="rooms_available"
-              name="rooms_available"
-              value={rooms_available}
-              onChange={handleChange}
+              type="number" id="rooms_available" name="rooms_available" value={rooms_available}  onChange={handleChange}
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-blue-500"
             />
           </div>
@@ -191,11 +164,7 @@ const PropertyForm = () => {
               Room Type
             </label>
             <input
-              type="text"
-              id="room_type"
-              name="room_type"
-              value={room_type}
-              onChange={handleChange}
+              type="text" id="room_type"  name="room_type" value={room_type} onChange={handleChange}
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-blue-500"
             />
           </div>
@@ -204,11 +173,7 @@ const PropertyForm = () => {
               Image 1
             </label>
             <input
-              type="file"
-              id="image_first"
-              name="image_first"
-              onChange={handleChange}
-              className="focus:outline-none"
+              type="file" id="image_first" name="image_first"  onChange={handleChange} className="focus:outline-none"
             />
           </div>
           <div>
@@ -216,11 +181,7 @@ const PropertyForm = () => {
               Image 2
             </label>
             <input
-              type="file"
-              id="image_second"
-              name="image_second"
-              onChange={handleChange}
-              className="focus:outline-none"
+              type="file" id="image_second" name="image_second" onChange={handleChange} className="focus:outline-none"
             />
           </div>
           <div>
@@ -228,11 +189,7 @@ const PropertyForm = () => {
               Image 3
             </label>
             <input
-              type="file"
-              id="image_third"
-              name="image_third"
-              onChange={handleChange}
-              className="focus:outline-none"
+              type="file" id="image_third" name="image_third" onChange={handleChange} className="focus:outline-none"
             />
           </div>
           <div>
@@ -240,12 +197,8 @@ const PropertyForm = () => {
               Image 4
             </label>
             <input
-              type="file"
-              id="image_fourth"
-              name="image_fourth"
-              onChange={handleChange}
-              className="focus:outline-none"
-            />
+              type="file" id="image_fourth"
+              name="image_fourth" onChange={handleChange} className="focus:outline-none"/>
           </div>
         </div>
 

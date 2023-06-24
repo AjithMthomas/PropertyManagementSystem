@@ -12,15 +12,19 @@ from rest_framework.response import Response
 from django.shortcuts import render
 from django.views import View
 from django.http import JsonResponse
-
+from django.db.models import Q
 from .models import Property
 from .models import Reservation
 from .serializers import ReservationSerializer
+
+PUBLIC_KEY = 'rzp_test_8emA6zzli6nGP1'
+SECRET_KEY =  'O4RlOXRxnLAX8IaXM3ifqFZZ'
 
 
 class PropertyListView(generics.ListAPIView):
     queryset = Property.objects.all()
     serializer_class = PropertySerializer
+
 
 
 class PropertyDetailView(APIView):
@@ -49,11 +53,49 @@ class CreatePropertyAPIView(APIView):
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-        
 
-PUBLIC_KEY = 'rzp_test_8emA6zzli6nGP1'
 
-SECRET_KEY =  'O4RlOXRxnLAX8IaXM3ifqFZZ'
+@api_view(['POST'])
+def Edit_property(request):
+    property_id = request.data.get('property_id')
+    try:
+        property = Property.objects.get(id=property_id)
+    except Property.DoesNotExist:
+        return Response({'error': 'Property not found'}, status=404)
+    
+    serializer = PropertySerializer(property, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+    
+    return Response(serializer.errors, status=400)
+
+
+
+
+@api_view(['GET'])
+def search_properties(request):
+    property_name = request.GET.get('property_name', '')
+    price = request.GET.get('price', '')
+    room_type = request.GET.get('room_type', '')
+
+    properties = Property.objects.all()
+
+    if property_name:
+        properties = properties.filter(Q(property_name__icontains=property_name) | Q(owner_name__icontains=property_name))
+
+    if price:
+        properties = properties.filter(price__icontains=price)
+
+    if room_type:
+        properties = properties.filter(room_type__icontains=room_type)
+
+    serializer = PropertySerializer(properties, many=True)
+    return Response(serializer.data)
+
+
+
+
 
 @api_view(['POST'])
 def start_payment(request):
@@ -128,3 +170,5 @@ def handle_payment_success(request):
     }
 
     return Response(res_data)
+
+

@@ -8,7 +8,7 @@ function AdminHome() {
     <div className='w-3/12'>
         <AdiminSidebar/>
     </div>
-    <div className="w-9/12">
+    <div className="w-9/12 ">
     <Properties/>
     </div>
     </div>
