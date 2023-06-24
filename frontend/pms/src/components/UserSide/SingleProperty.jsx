@@ -5,18 +5,45 @@ import {
     Typography,
     Button,Rating,
   } from "@material-tailwind/react";
-  import React,{useState} from "react";
-  import { ArrowLongRightIcon } from "@heroicons/react/24/outline";
+  import React,{useState,useEffect} from "react";
   import { AiFillCloseCircle } from 'react-icons/ai';
+  import { useParams } from "react-router-dom";
+  import axios from "axios";
+  import { BASE_URL } from "../config";
+  import CheckoutForm from "./Checkout";
    
   export default function SingleProperty() {
 
     const [rated, setRated] = useState(4);
+
+    const {id} = useParams('')
     
     const [showVideo,SetShowVideo] = useState(false)
+
+    const [showCheckOut,setChecheckOut] = useState(false)
+
+    const [property, setProperty] = useState([]);
+
+    useEffect(() => {
+      console.log(id)
+      const fetchProperty = async () => {
+        try {
+          const response = await axios.get(`/property/single_property/${id}/`);
+          setProperty(response.data);
+        } catch (error) {
+          console.error(error);
+        }
+      };
+  
+      fetchProperty();
+    }, [id]);
+
     return (
       <div className="flex flex-col ">
-        
+        {showCheckOut&&
+         <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-50">
+           <CheckoutForm  property={property}/>
+        </div>}
         {showVideo&&
         <>
         <span onClick={()=>SetShowVideo(false)} className="ml-auto text-2xl"> <AiFillCloseCircle/> </span>
@@ -31,23 +58,23 @@ import {
            
         <CardHeader shadow={false} floated={false} className="w-2/5 shrink-0 m-0 rounded-r-none">
           <img 
-            src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80" 
+            src={BASE_URL+property?.image_first}
             alt="image" 
             className="w-full h-full object-cover"
           />
         </CardHeader>
-        <CardBody>
-          <Typography variant="h6" color="blue" className="uppercase mb-4">startups</Typography>
+        <CardBody className=" bg-gray-100">
+          <Typography variant="h6" color="blue" className="uppercase mb-4 font-serif text-2xl">{property?.property_name}</Typography>
           <Typography variant="h4" color="blue-gray" className="mb-2">
-            Lyft launching cross-platform service this week
+            {property?.address}
           </Typography>
           <Typography color="gray" className="font-normal mb-8">
-            Like so many organizations these days, Autodesk is a company in transition. It was until recently a traditional boxed software company selling licenses. Yet its own business model disruption is only part of the story
+            {property?.description}
           </Typography>
           <a href="#" className="inline-block">
             <Button variant="text" className="flex items-center gap-2">
-              Learn More 
-              <ArrowLongRightIcon strokeWidth={2} className="w-4 h-4" />
+             { property?.phone_number }
+              
             </Button>
           </a>
           <div className="flex place-content-center justify-items-center mt-4">
@@ -57,14 +84,14 @@ import {
           </Typography>
           </div>
           <button className="bg-blue-500 text-black  py-2 px-4  rounded-md border-white mt-4 w-1/4" onClick={()=>SetShowVideo(true)}><span>Preview</span></button>
-          <button className="bg-yellow-500 text-black py-2 px-4 rounded-md border-black mt-4 ms-3" >Book Property</button>
+          <button className="bg-yellow-500 text-black py-2 px-4 rounded-md border-black mt-4 ms-3" onClick={()=>setChecheckOut(true)}>Book Property</button>
         </CardBody>
         </Card>
       </div>
       <div className="w-full flex place-content-center justify-items-center ">
       <div className="flex justify-center mt-8 w-3/4">
         <img
-          src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/06/1e/e3/50/jw-marriott-hotel-mumbai.jpg?w=1200&h=-1&s=1"
+          src={"https://dynamic-media-cdn.tripadvisor.com/media/photo-o/06/1e/e3/50/jw-marriott-hotel-mumbai.jpg?w=1200&h=-1&s=1"}
           alt="Image 1"
           className="w-1/4 h-auto mx-2"
         />

@@ -10,6 +10,7 @@ const LoginPage = () => {
     const history = useNavigate();
 
     useEffect(() => {
+      
         const checkLoggedInUser = async () => {
 
           const localResponse = getLocal('authToken');

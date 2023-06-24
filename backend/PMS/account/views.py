@@ -58,7 +58,7 @@ class UserRegistration(APIView):
             return Response({'msg':'Registration Success'})
         
         return Response({'msg':'Registration Failed'})
-    
+   
     
 @api_view(['GET'])
 def activate(request, uidb64, token):

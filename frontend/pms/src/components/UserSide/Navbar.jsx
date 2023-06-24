@@ -9,6 +9,9 @@ import {
 import { Link } from "react-router-dom";
 import { Toaster } from 'react-hot-toast';
 import { getLocal } from '../Contexts/auth'
+import { useNavigate } from "react-router-dom";
+import jwtDecode from "jwt-decode";
+
 
 
  
@@ -17,8 +20,16 @@ export default function NavbarComponent() {
 
 
   const localResponse = getLocal('authToken');
+  const history = useNavigate()
+
+  const handleclick=()=>{
+    localStorage.removeItem('authToken');
+    history('/login')
+  }
 
   useEffect(() => {
+    const decoded = jwtDecode(localResponse)
+    console.log(decoded,'decoded')
     window.addEventListener("resize", () => window.innerWidth >= 960 && setOpenNav(false));
   }, []);
  
@@ -69,9 +80,9 @@ export default function NavbarComponent() {
  
   return (
     <>
-    <Navbar className="sticky bg-nav  lg:px-8 lg:py-4  top-0 z-50  bg-white">
+    <Navbar className="sticky bg-nav  lg:px-8 lg:py-4  top-0 z-50 bg-gray-300 ">
       <Toaster position='top-center' reverseOrder='false' limit={1} ></Toaster>
-        <div className="bg-nav container  flex items-center justify-between text-blue-gray-900 text-black">
+        <div className="bg-nav  flex items-center justify-between text-blue-gray-900 text-black">
       <Link to='/'> <Typography
           as="a"
           href="#"
@@ -79,11 +90,20 @@ export default function NavbarComponent() {
         >
           PropertyPro
         </Typography></Link> 
-        <div className="hidden lg:block">{navList}</div>
+        
+        <div className="hidden lg:block ">{navList}</div>
+        <div className="flex gap-3 place-content-end">
         <Link to="/login"><Button variant="gradient" size="sm" className="hidden lg:inline-block  hover:bg-blue-500">
           {localResponse?(<span className=" text-black ">Dashboard</span>):
           (<span className=" text-black ">Login</span>)}
         </Button></Link>
+        {localResponse &&
+        <Button variant="gradient" size="sm" className=" text-black hover:bg-blue-500 "onClick={()=>handleclick()}>
+          Logout
+        </Button>
+        }
+        </div>
+        
         <IconButton
           variant="text"
           className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
@@ -121,6 +141,7 @@ export default function NavbarComponent() {
             </svg>
           )}
         </IconButton>
+        
       </div>
       <MobileNav open={openNav}>
         <div className="container mx-auto ">
