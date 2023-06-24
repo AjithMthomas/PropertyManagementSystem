@@ -1,10 +1,8 @@
 import React,{useState,useEffect} from 'react'
 import axios from 'axios'
 import { AiFillEdit } from 'react-icons/ai'
-import { Link } from 'react-router-dom'
 import { Button } from "@material-tailwind/react";
-import { BASE_URL } from '../config';
-import { toast,Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 import PropertyForm from './CreateProperty';
 
 function Properties() {

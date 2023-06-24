@@ -30,7 +30,6 @@ function SignUp() {
   });
 
   useEffect(() => {
-    // Simulate an asynchronous task
     setTimeout(() => {
       setIsLoading(false);
     }, 2000);

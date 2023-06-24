@@ -19,25 +19,20 @@ const LoginPage = () => {
             const decoded = jwt_decode(localResponse);
           
             if (decoded.is_admin) {
-              // If the user is an admin, redirect to the admin page
               history('/AdminDashboard');
           
             } else {
-              // If the user is a regular user, check if there is a stored location
               const location = localStorage.getItem('location');
     
               if (location) {
-                // If a location is stored, redirect to that location
                 history(location, { replace: true });
                 localStorage.removeItem('location');
                 
               } else {
-                // If no location is stored, redirect to the home page
                 history('/', { replace: true });
               }
             }
           } else {
-            // If the user is not logged in, display an error message
             toast.loading('Please Login into your accout',{duration: 2000});
           }
         };
@@ -50,8 +45,7 @@ const LoginPage = () => {
         const loginResponse = await login(e);
         console.log(loginResponse, 'login response');
     
-        if (loginResponse) {
-          // If the login is successful, redirect to the home page
+        if (loginResponse) {  
           history('/');
           toast.success('Logged in succesfully')
           

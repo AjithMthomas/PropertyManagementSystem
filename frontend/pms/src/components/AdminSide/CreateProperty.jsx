@@ -51,9 +51,7 @@ const PropertyForm = () => {
     data.append('image_first', image_first);
     data.append('image_second', image_second);
     data.append('image_third', image_third);
-    data.append('image_fourth', image_fourth);
-
-    
+    data.append('image_fourth', image_fourth)
 
     try {
         const response = await axios.post('/property/properties/create/', data, {
@@ -124,7 +122,6 @@ const PropertyForm = () => {
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-blue-500"
             />
           </div>
-          {/* Add more fields here */}
           <div>
             <label htmlFor="price" className="block mb-2 font-medium">
               Price

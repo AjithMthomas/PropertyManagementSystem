@@ -1,15 +1,8 @@
 import React from "react";
 import {
-  Card,
-  Typography,
-  List,
-  ListItem,
+  Card,Typography,List,
   ListItemPrefix,
-  ListItemSuffix,
-  Chip,
-  Accordion,
-  AccordionHeader,
-  AccordionBody,
+   Accordion,AccordionHeader,
 } from "@material-tailwind/react";
 import {
   PresentationChartBarIcon,
